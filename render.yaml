@@ -1,0 +1,29 @@
+services:
+  - type: web
+    name: q4-api
+    env: docker
+    plan: free
+    dockerfilePath: Dockerfile
+
+    envVars:
+      - key: REDIS_HOST
+        fromService:
+          type: redis
+          name: q4-redis
+          property: host
+
+      - key: REDIS_PORT
+        fromService:
+          type: redis
+          name: q4-redis
+          property: port
+
+      - key: REDIS_PASSWORD
+        fromService:
+          type: redis
+          name: q4-redis
+          property: password
+
+  - type: redis
+    name: q4-redis
+    plan: free
